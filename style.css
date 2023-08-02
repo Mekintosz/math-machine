@@ -1,0 +1,23 @@
+.container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.calc{
+    display: grid;
+    grid-template-rows: 1fr 3fr;
+}
+
+.display {
+    grid-row: 1 / 2;
+}
+
+.result {
+    font-size: 60px;
+}
+
+.buttons {
+    grid-row: 2 / 3;
+}
