@@ -2,6 +2,9 @@ let currentDisplay = 0;
 let display = document.querySelector(".result")
 display.innerText = currentDisplay
 
+let numFirst = "";
+let operators = "";
+
 const num1 = document.querySelector(".b1")
 const num2 = document.querySelector(".b2")
 const num3 = document.querySelector(".b3")
@@ -30,11 +33,19 @@ const multiply = document.querySelector(".multiply")
 const divide = document.querySelector(".divide")
 const equal = document.querySelector(".equal")
 
+
+
 add.addEventListener("click", () => gatherData("+"))
 subtract.addEventListener("click", () => gatherData("-"))
 multiply.addEventListener("click", () => gatherData("*"))
 divide.addEventListener("click", () => gatherData("/"))
 equal.addEventListener("click", () => operate(numFirst, currentDisplay, operators))
+
+const clear = document.querySelector(".clear")
+const reset = document.querySelector(".reset")
+
+clear.addEventListener("click", () => clearLast())
+reset.addEventListener("click", () => resetAll())
 
 
 function operate(numA, numB, operator) {
@@ -53,6 +64,8 @@ function operate(numA, numB, operator) {
            result = +numA / +numB;
            break;
     };
+
+    result = result.toString()
     display.innerText = `${result}`;
     currentDisplay = result
 }
@@ -66,13 +79,24 @@ function updateDisplay(call) {
     currentDisplay = display.innerText
 }
 
-let numFirst = "";
-let numSecond = "";
-let operators = "";
-
 function gatherData(oper) {
     numFirst = currentDisplay
     display.innerText = 0
     currentDisplay = 0;
     operators = oper
+}
+
+function clearLast() {
+    if (currentDisplay > 9) {
+        currentDisplay = currentDisplay.slice(0, -1);
+    } else if (currentDisplay > 0 && currentDisplay <=9)
+        currentDisplay = 0;
+    display.innerText = `${currentDisplay}`
+}
+
+function resetAll() {
+    numFirst = "";
+    operators = "";
+    currentDisplay = 0;
+    display.innerText = 0;
 }
