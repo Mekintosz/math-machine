@@ -1,6 +1,3 @@
-let numA = 0;
-let numB = 0;
-let operator = "";
 let currentDisplay = 0;
 let display = document.querySelector(".result")
 display.innerText = currentDisplay
@@ -16,8 +13,6 @@ const num8 = document.querySelector(".b8")
 const num9 = document.querySelector(".b9")
 const num0 = document.querySelector(".b0")
 
-
-
 num1.addEventListener("click", () => updateDisplay(1))
 num2.addEventListener("click", () => updateDisplay(2))
 num3.addEventListener("click", () => updateDisplay(3))
@@ -29,32 +24,37 @@ num8.addEventListener("click", () => updateDisplay(8))
 num9.addEventListener("click", () => updateDisplay(9))
 num0.addEventListener("click", () => updateDisplay(0))
 
-arrOfOperators = ["+", "-", "*", "/", "="]
-
 const add = document.querySelector(".add")
 const subtract = document.querySelector(".subtract")
 const multiply = document.querySelector(".multiply")
 const divide = document.querySelector(".divide")
 const equal = document.querySelector(".equal")
-add.addEventListener("click", () => )
-equal.addEventListener("click", () =>)
+
+add.addEventListener("click", () => gatherData("+"))
+subtract.addEventListener("click", () => gatherData("-"))
+multiply.addEventListener("click", () => gatherData("*"))
+divide.addEventListener("click", () => gatherData("/"))
+equal.addEventListener("click", () => operate(numFirst, currentDisplay, operators))
+
 
 function operate(numA, numB, operator) {
-
+    let result = 0;
     switch(operator) {
         case "+": 
-            numA+numB;
+            result = +numA + +numB;
             break;
         case "-":
-            numA-numB;
-            break;
+           result = +numA - +numB;
+           break;
         case "*":
-            numA*numB;
-            break;
+           result = +numA * +numB;
+           break;
         case "/":
-            numA/numB;
-            break;
+           result = +numA / +numB;
+           break;
     };
+    display.innerText = `${result}`;
+    currentDisplay = result
 }
 
 function updateDisplay(call) {
@@ -63,7 +63,16 @@ function updateDisplay(call) {
     } else {
         display.innerText = `${currentDisplay}${call}`
     }
-currentDisplay = display.innerText
+    currentDisplay = display.innerText
 }
 
-function equal() {}
+let numFirst = "";
+let numSecond = "";
+let operators = "";
+
+function gatherData(oper) {
+    numFirst = currentDisplay
+    display.innerText = 0
+    currentDisplay = 0;
+    operators = oper
+}
