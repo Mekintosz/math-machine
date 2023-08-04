@@ -79,7 +79,9 @@ function operate(numA, numB, operator) {
 }
 
 function updateDisplay(call) {
-    if (currentDisplay == 0) {
+    if (currentDisplay == 0 && call == ".") {
+        display.innerText = "0."
+    } else if (currentDisplay === "0") {
         display.innerText = `${call}`;
     } else {
         display.innerText = `${currentDisplay}${call}`
@@ -91,16 +93,17 @@ function updateDisplay(call) {
 
 function gatherData(oper) {
     numFirst = currentDisplay
-    display.innerText = 0
+    display.innerText = "0";
     currentDisplay = "0";
     operators = oper
 }
 
 function clearLast() {
-    if (currentDisplay > 9) {
-        currentDisplay = currentDisplay.slice(0, -1);
-    } else if (currentDisplay > 0 && currentDisplay <=9)
+    if (+currentDisplay.isInteger && currentDisplay == /[^0-9]/) {
         currentDisplay = "0";
+    } else {
+        currentDisplay = currentDisplay.slice(0, -1);
+    }
     display.innerText = `${currentDisplay}`
 }
 
