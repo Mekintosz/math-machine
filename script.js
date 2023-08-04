@@ -1,4 +1,4 @@
-let currentDisplay = 0;
+let currentDisplay = "0";
 let display = document.querySelector(".result")
 display.innerText = currentDisplay
 
@@ -50,9 +50,10 @@ reset.addEventListener("click", () => resetAll())
 const calc = document.querySelector(".calc");
 calc.addEventListener("click", () => checkDot())
 
-const formatter = new Intl.NumberFormat('en-US', {
+const formatter = new Intl.NumberFormat('en', {
     minimumFractionDigits: 0,      
     maximumFractionDigits: 4,
+    useGrouping: false,
  });
 
 function operate(numA, numB, operator) {
@@ -91,7 +92,7 @@ function updateDisplay(call) {
 function gatherData(oper) {
     numFirst = currentDisplay
     display.innerText = 0
-    currentDisplay = 0;
+    currentDisplay = "0";
     operators = oper
 }
 
@@ -99,15 +100,15 @@ function clearLast() {
     if (currentDisplay > 9) {
         currentDisplay = currentDisplay.slice(0, -1);
     } else if (currentDisplay > 0 && currentDisplay <=9)
-        currentDisplay = 0;
+        currentDisplay = "0";
     display.innerText = `${currentDisplay}`
 }
 
 function resetAll() {
     numFirst = "";
     operators = "";
-    currentDisplay = 0;
-    display.innerText = 0;
+    currentDisplay = "0";
+    display.innerText = "0";
 }   
 
 function checkDot() {
